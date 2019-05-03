@@ -1,0 +1,21 @@
+{
+  "name": "EZPi",
+  "version": "0.1.0",
+  "productName": "EZPi",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+
+	
+  },
+  "devDependencies": {
+    "electron": "^3.0.13",
+    "electron-packager": "^13.1.1",
+	"sudo-prompt": "^8.2.5",
+"python-shell": "^1.0.7",
+	"w3-css": "^4.1.0",
+	"w3css": "^2.7.0"  
+  }
+}

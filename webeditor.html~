@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Editor</title>
+  <style type="text/css" media="screen">
+    body {
+
+    }
+	#container
+	{
+height: 100vh;
+
+}
+    #editor {
+    margin-top: 0;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+  </style>
+</head>
+<link rel="stylesheet" href="w3.css">
+<body>
+<div>
+<button onClick="saveFunction()">Save file</button>
+<textarea rows="1" cols="80" id="temp_path">
+/home/pi/Desktop/
+</textarea>
+<a href="ezserv.html"><button>Back</button></a>
+</div>
+<div id="container">
+<pre id="editor">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;
+EZServer
+&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to EZServer&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</pre>
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+var sudo = require('sudo-prompt');
+var options = {
+  name: 'Electron',
+  icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
+};
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.session.setMode("ace/mode/html");
+    var output;
+function saveFunction() {
+var cont = editor.getValue();
+var tempfilepath = document.getElementById('temp_path');
+var path = tempfilepath.value;
+path = path.concat('indextest.html');
+console.log(path);
+var fs = require('fs');
+try { fs.writeFileSync('/home/pi/Desktop/indextest.html', cont, 'utf-8'); }
+catch(e) { alert('Failed to save the file !'); }
+const { exec } = require('child_process');
+sudo.exec('mv /home/pi/Desktop/indextest.html /var/www/html/index.html', options,
+  function(error, stdout, stderr) {
+    if (error) throw error;
+    console.log('stdout: ' + stdout);
+  }
+);
+	//exec('mv indextest.html /var/www/html/index.html');
+}
+
+
+
+
+</script>
+</div>
+
+</body>
+</html>

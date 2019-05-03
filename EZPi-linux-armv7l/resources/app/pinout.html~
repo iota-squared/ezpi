@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<style>
+.flex-container {
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-evenly;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  font-size: 30px;
+}
+.btn-group button {
+  background-color: #000000; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  display:block;
+  width:100%;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+
+
+
+</style>
+    <meta charset="UTF-8">
+    <title>EZ Pi</title>
+  </head>
+ <link rel="stylesheet" href="w3.css">
+ <link rel="stylesheet" href="2019-colors.css">
+  <body onload="loader()">
+    <div class="w3-top">
+  <div class="w3-bar w3-2019-bluestone w3-padding-large w3-card">
+    <a href="index.html" class="w3-bar-item w3-large w3-btn"><b>EZ</b> Pi</a>
+  </div>
+</div>
+<br><br><br>
+  <div class="w3-center w3-large">
+  EZ GPIO
+  </div>
+<div class="flex-container">
+
+  <div class="btn-group">
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(1)" value='1' disabled id='1'>1</button>
+  <button onClick="myFunction(3)" value='1' id='3'>3</button>
+  <button onClick="myFunction(5)" value='1' id='5'>5</button>
+  <button onClick="myFunction(7)" value='1' id='7'>7</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(9)" value='1' id='9' disabled>9</button>
+  <button onClick="myFunction(11)" value='1' id='11'>11</button>
+  <button onClick="myFunction(13)" value='1' id='13'>13</button>
+  <button onClick="myFunction(15)" value='1' id='15'>15</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(17)" value='1' id='17' disabled>17</button>
+  <button onClick="myFunction(19)" value='1' id='19'>19</button>
+  <button onClick="myFunction(21)" value='1' id='21'>21</button>
+  <button onClick="myFunction(23)" value='1' id='23'>23</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(25)" value='1' id='25' disabled>25</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(27)" value='1' id='27' disabled>27</button>
+  <button onClick="myFunction(29)" value='1' id='29'>29</button>
+  <button onClick="myFunction(31)" value='1' id='31'>31</button>
+  <button onClick="myFunction(33)" value='1' id='33'>33</button>
+  <button onClick="myFunction(35)" value='1' id='35'>35</button>
+  <button onClick="myFunction(37)" value='1' id='37'>37</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(39)" value='1' id='39' disabled>39</button>
+  </div>
+  <div class="btn-group">
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(2)" value='1' id='2' disabled>2</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(4)" value='1' id='4' disabled>4</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(2)" onClick="myFunction(6)" value='1' id='6' disabled>6</button>
+  <button onClick="myFunction(8)" value='1' id='8'>8</button>
+  <button onClick="myFunction(10)" value='1' id='10'>10</button>
+  <button onClick="myFunction(12)" value='1' id='12'>12</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(14)" value='1' id='14' disabled>14</button>
+  <button onClick="myFunction(16)" value='1' id='16'>16</button>
+  <button onClick="myFunction(18)" value='1' id='18'>18</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(20)" value='1' id='20' disabled>20</button>
+  <button onClick="myFunction(22)" value='1' id='22'>22</button>
+  <button onClick="myFunction(24)" value='1' id='24'>24</button>
+  <button onClick="myFunction(26)" value='1' id='26'>26</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(28)" value='1' id='28' disabled>28</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(30)" value='1' id='30' disabled>30</button>
+  <button onClick="myFunction(32)" value='1' id='32'>32</button>
+  <button class="w3-btn w3-red w3-hover-teal" onClick="myFunction(34)" value='1' id='34' disabled>34</button>
+  <button onClick="myFunction(36)" value='1' id='36'>36</button>
+  <button class="w3-btn w3-hover-gray" onClick="myFunction(38)" value='1' id='38'>38</button>
+  <button onClick="myFunction(40)" value='1' id='40'>40</button>
+  </div>
+</div>
+
+<p id="demo"></p>
+
+<script>
+const{exec} = require('child_process');
+function loader() {
+	var i;
+	var output = 3;
+var element;
+var array=[];
+for (i=1;i<=40;i++) {
+	output = require('child_process').execSync('gpio -1 read '+ i.toString());
+var string = new TextDecoder("utf-8").decode(output);
+string = string.trim();
+if (string == "0") {
+  	 	element = document.getElementById(i);
+  	 	console.log(string);
+  	 	element.style.backgroundColor="#0066cc";
+  	 }
+  	 else if (string == "1") {
+  	 	element = document.getElementById(i);
+  	 	console.log(string);
+  	 	element.style.backgroundColor="#ff0000";
+  	 }
+  	 else {
+  	 	console.log(string);
+  	 }
+array.push(string);
+}
+
+for (i=1;i<=40;i++){
+var path = require('path');
+
+var command = "python "+path.resolve( __dirname, "./check.py")+" "+i.toString();
+//output = require('child_process').execSync('python '+' check.py '+ i.toString());
+output = require('child_process').execSync(command);
+console.log(command);
+//path.resolve( __dirname, "./check.py")
+
+//
+
+
+//var spawn = require("child_process").spawn;
+//var process = spawn('python',[path.resolve( __dirname, "check.py" )]);
+//console.log(process);
+
+/*/process.stdout.on('data',function(chunk){
+
+    output = chunk.toString('utf8');// buffer to string
+    console.log(output);
+});*/
+
+
+
+
+		var string = new TextDecoder("utf-8").decode(output);
+		//console.log(curpath);
+string = string.trim();
+if (string=="0") {
+		console.log("output");
+}
+else if (string=="1") {
+	element = document.getElementById(i);
+  	console.log("input");
+  	element.style.backgroundColor="#000000";
+}
+else {
+	console.log("neither");
+}
+}
+
+}
+
+
+
+</script>
+<script>
+var sudo = require('sudo-prompt');
+
+
+
+var options = {
+  name: 'Electron',
+  icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
+};
+function myFunction(a)
+{
+var pins = document.getElementById(a);
+var state = pins.value;
+if (state=='1') {
+	pins.value = '2';
+	pins.style.backgroundColor = '#0066cc';
+}
+else if (state=='2') {
+	pins.value = '3';
+	pins.style.backgroundColor = '#ff0000';
+}
+else {
+	pins.value = '1';
+	pins.style.backgroundColor = '#000000';
+	
+}
+const{exec} = require('child_process');
+var pathhere = require('path');
+var str = "python "+pathhere.resolve( __dirname, "./on.py")+" ";
+//var str = 'python on.py ';
+
+str = str + a + " " + pins.value;
+output = require('child_process').execSync(str);
+console.log('pin_no:' + a);
+console.log('value:' + pins.value);
+console.log('command sent:' + str);
+/*exec(str, options,
+  function(error, stdout, stderr) {
+    if (error) throw error;
+    console.log('stdout: ' + stdout);
+  }
+);
+exec('gpio -g read 20', options,
+  function(error, stdout, stderr) {
+    if (error) throw error;
+    console.log('stdout: ' + stdout);
+  }
+);
+*/
+
+
+}
+
+</script>
+<div class="btn-group">
+  <a href="index.html"><button>Go back</button></a>
+  </div>
+  </body>
+</html>
